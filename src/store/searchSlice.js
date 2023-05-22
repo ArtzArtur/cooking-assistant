@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 
-export const handleSearch = createAsyncThunk('fetch/data-fetch',async(endpoint)=>{
+export const handleSearch = createAsyncThunk('fetch/data-fetch',async(query)=>{
   try{
   const apiKey = import.meta.env.VITE_APIKEY;
-  const resp = await fetch(`https://api.spoonacular.com/recipes/${endpoint}apiKey=${apiKey}`)
+  const resp = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=20&apiKey=${apiKey}`)
   const json = await resp.json()
   return json
   }
@@ -15,8 +15,8 @@ export const handleSearch = createAsyncThunk('fetch/data-fetch',async(endpoint)=
 })
 
 
-export const fetchSlice = createSlice({
-  name: 'fetch',
+export const searchSlice = createSlice({
+  name: 'search',
   initialState: {
     data: [],
     loading:null,
@@ -40,4 +40,4 @@ export const fetchSlice = createSlice({
   }
 })
 
-export default fetchSlice.reducer
+export default searchSlice.reducer

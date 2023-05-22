@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import searchReducer from './store/searchSlice'
+import detailsReducer from './store/detailsSlice'
 export default configureStore({
   reducer: {
-    search: searchReducer
+    search: searchReducer,
+    details: detailsReducer
   },
 })

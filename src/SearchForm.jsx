@@ -10,7 +10,6 @@ function SearchForm() {
   const loading = useSelector((state) => state.search.loading);
   const [minLetters, setMinLetters] = useState(false);
   const [query, setQuery] = useState("");
-  const endPoint = `complexSearch?query=${query}&number=20&`;
   const handleForm = (query) => {
     if (query.length <= 1) {
       setMinLetters((oldVal) => (oldVal = true));
@@ -18,7 +17,7 @@ function SearchForm() {
     }
     setMinLetters((oldVal) => (oldVal = false));
     setQuery(query);
-    dispatch(handleSearch(endPoint));
+    dispatch(handleSearch(query));
   };
   return (
     <div>
