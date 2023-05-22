@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./Home";
 import RandomReceipts from "./RandomReceipts";
+import ReceiptDetails from "./ReceiptDetails";
 import { useState } from "react";
 function App() {
   const [showNav, setShowNav] = useState(false);
@@ -51,6 +52,7 @@ function App() {
         </header>
         <Routes>
           <Route path="/cooking-assistant/" element={<Home />}></Route>
+          <Route path="/cooking-assistant/ReceiptDetails/:id" element={<ReceiptDetails />}></Route>
           <Route path="/cooking-assistant/RandomReceipts" element={<RandomReceipts />}></Route>
         </Routes>
       </Router>

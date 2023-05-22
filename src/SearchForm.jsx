@@ -18,7 +18,6 @@ function SearchForm() {
       setMinLetters((oldVal) => (oldVal = true));
       return;
     } else {
-      console.log("fetching");
       setMinLetters((oldVal) => (oldVal = false));
       setQuery(query);
       dispatch(handleFetch(endPoint));
@@ -45,7 +44,9 @@ function SearchForm() {
           Search
         </button>
       </form>
-      {loading ? <p>Loading..</p> : null}
+      {loading ? <div className="min-h-[300px] grid place-content-center">
+        <p>Loading..</p>
+      </div> : null}
       <div  className="flex flex-wrap justify-center">
         {data.results
           ? data.results.map((meal) => <SearchResults meal={meal} key={meal.id}/>)
