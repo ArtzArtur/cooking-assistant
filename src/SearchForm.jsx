@@ -1,33 +1,30 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { handleFetch } from "./store/fetchSlice";
-import SearchResults from "./SearchResults";
+import { handleSearch } from "./store/searchSlice";
+import SearchResult from "./SearchResult";
 
 function SearchForm() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.fetch.data);
-  const error = useSelector((state) => state.fetch.error);
-  const loading = useSelector((state) => state.fetch.loading);
+  const data = useSelector((state) => state.search.data);
+  const error = useSelector((state) => state.search.error);
+  const loading = useSelector((state) => state.search.loading);
   const [minLetters, setMinLetters] = useState(false);
-  const apiKey = import.meta.env.VITE_APIKEY;
   const [query, setQuery] = useState("");
-  const endPoint = `complexSearch?query=${query}&number=20&apiKey=${apiKey}`;
-  console.log(data);
-  const handleSearch = (query) => {
+  const endPoint = `complexSearch?query=${query}&number=20&`;
+  const handleForm = (query) => {
     if (query.length <= 1) {
       setMinLetters((oldVal) => (oldVal = true));
       return;
-    } else {
-      setMinLetters((oldVal) => (oldVal = false));
-      setQuery(query);
-      dispatch(handleFetch(endPoint));
     }
+    setMinLetters((oldVal) => (oldVal = false));
+    setQuery(query);
+    dispatch(handleSearch(endPoint));
   };
   return (
     <div>
       <form
         onSubmit={(e) => {
-          e.preventDefault(), handleSearch(query);
+          e.preventDefault(), handleForm(query);
         }}
         className="grid place-content-center"
       >
@@ -44,12 +41,16 @@ function SearchForm() {
           Search
         </button>
       </form>
-      {loading ? <div className="min-h-[300px] grid place-content-center">
-        <p>Loading..</p>
-      </div> : null}
-      <div  className="flex flex-wrap justify-center">
+      {loading ? (
+        <div className="min-h-[300px] grid place-content-center">
+          <p>Loading..</p>
+        </div>
+      ) : null}
+      <div className="flex flex-wrap justify-center">
         {data.results
-          ? data.results.map((meal) => <SearchResults meal={meal} key={meal.id}/>)
+          ? data.results.map((meal) => (
+              <SearchResult meal={meal} key={meal.id} />
+            ))
           : null}
       </div>
     </div>

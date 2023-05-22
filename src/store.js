@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import fetchReducer from './store/fetchSlice'
+import searchReducer from './store/searchSlice'
 export default configureStore({
   reducer: {
-    fetch: fetchReducer
+    search: searchReducer
   },
 })
