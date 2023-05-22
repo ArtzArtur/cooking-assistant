@@ -20,7 +20,7 @@ function App() {
             </div>
             <i className="px-5 fas fa-utensils text-3xl"></i>
           </div>
-          <nav className="bg-red-600 flex justify-end rounded-xl">
+          <nav className="bg-red-600 flex justify-end rounded-xl lg:max-w-[1000px] py-2 lg:mx-auto">
             {!showNav ? (
               <i
                 className="fas fa-bars text-3xl pr-5 hover:text-red-200 cursor-pointer sm:hidden"
@@ -34,7 +34,7 @@ function App() {
             )}
 
             <ul
-              className={`grid h-screen w-screen place-content-center absolute top-0 left-0 bg-red-700 transition-opacity duration-500 ${
+              className={`grid h-screen w-full place-content-center absolute top-0 left-0 bg-red-700 transition-opacity duration-500 ${
                 showNav
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"

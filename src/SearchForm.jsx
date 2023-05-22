@@ -1,29 +1,58 @@
-import { useState } from "react"
-import {useDispatch} from 'react-redux'
-import {handleFetch} from './store/fetchSlice'
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleFetch } from "./store/fetchSlice";
+import SearchResults from "./SearchResults";
 
 function SearchForm() {
-  const dispatch = useDispatch()
-  const apiKey = import.meta.env.VITE_APIKEY
-  // const endPoint = `random?number=5&apiKey=${apiKey}`
-  const [query,setQuery] = useState()
-  const handleSearch = (e) => {
-    if(e.target.value<2){
-      return
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.fetch.data);
+  const error = useSelector((state) => state.fetch.error);
+  const loading = useSelector((state) => state.fetch.loading);
+  const [minLetters, setMinLetters] = useState(false);
+  const apiKey = import.meta.env.VITE_APIKEY;
+  const [query, setQuery] = useState("");
+  const endPoint = `complexSearch?query=${query}&number=20&apiKey=${apiKey}`;
+  console.log(data);
+  const handleSearch = (query) => {
+    if (query.length <= 1) {
+      setMinLetters((oldVal) => (oldVal = true));
+      return;
+    } else {
+      console.log("fetching");
+      setMinLetters((oldVal) => (oldVal = false));
+      setQuery(query);
+      dispatch(handleFetch(endPoint));
     }
-    else{
-      setQuery(e.target.value)
-    }
-  }
-  const endPoint = `complexSearch?query=${query}&apiKey=${apiKey}`
+  };
   return (
-    <form className='grid place-content-center'>
-      <input 
-      onChange={(e)=>handleSearch(e)}
-      type="text" className='text-black p-2 rounded-xl outline-none' placeholder="Looking for..?"/>
-      <button type="button" onClick={()=>dispatch(handleFetch(endPoint))} className="p-2 m-2 border-2 border-white rounded-xl hover:bg-red-600">Search</button>
-    </form>
-  )
+    <div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(), handleSearch(query);
+        }}
+        className="grid place-content-center"
+      >
+        <input
+          onChange={(e) => setQuery((old) => (old = e.target.value.trim()))}
+          type="text"
+          className="text-black p-2 rounded-xl outline-none"
+          placeholder="Looking for..?"
+        />
+        {minLetters ? (
+          <p className="text-red-100">Type at least 2 letters</p>
+        ) : null}
+        <button className="p-2 m-2 border-2 border-white rounded-xl hover:bg-red-600">
+          Search
+        </button>
+      </form>
+      {loading ? <p>Loading..</p> : null}
+      <div  className="flex flex-wrap justify-center">
+        {data.results
+          ? data.results.map((meal) => <SearchResults meal={meal} key={meal.id}/>)
+          : null}
+      </div>
+    </div>
+  );
 }
 
-export default SearchForm
+export default SearchForm;
