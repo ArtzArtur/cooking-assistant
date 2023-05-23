@@ -42,10 +42,10 @@ function App() {
               } sm:opacity-100 sm:pointer-events-auto sm:h-auto sm:static sm:flex sm:bg-transparent`}
             >
               <li className="p-2 m-2">
-                <Link className="hover:text-red-200" to="/cooking-assistant/">Home</Link>
+                <Link onClick={()=>setShowNav(nav=>nav=false)} className="hover:text-red-200" to="/cooking-assistant/">Home</Link>
               </li>
               <li className="p-2 m-2">
-                <Link className="hover:text-red-200" to="/cooking-assistant/RandomReceipts">Random receipts</Link>
+                <Link onClick={()=>setShowNav(nav=>nav=false)} className="hover:text-red-200" to="/cooking-assistant/RandomReceipts">Random receipts</Link>
               </li>
             </ul>
           </nav>

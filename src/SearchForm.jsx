@@ -41,16 +41,17 @@ function SearchForm() {
         </button>
       </form>
       {loading ? (
-        <div className="min-h-[300px] grid place-content-center">
+        <div>
           <p>Loading..</p>
         </div>
       ) : null}
       <div className="flex flex-wrap justify-center">
+        {error ? <div>{error}</div> :null}
         {data.results
           ? data.results.map((meal) => (
               <SearchResult meal={meal} key={meal.id} />
             ))
-          : null}
+          : null} 
       </div>
     </div>
   );
