@@ -1,10 +1,10 @@
-import { createSlice, isRejectedWithValue } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 
 export const handleSearch = createAsyncThunk('fetch/data-fetch', async (query) => {
     const apiKey = import.meta.env.VITE_APIKEY;
-    const resp = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=20&apiKey=${apiKey}`)
+    const resp = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=30&apiKey=${apiKey}`)
     const json = await resp.json()
     if(!resp.ok){
       throw new Error(json.message)

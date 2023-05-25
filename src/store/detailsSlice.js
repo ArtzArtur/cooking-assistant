@@ -3,8 +3,7 @@ import {createAsyncThunk, createSlice, isRejectedWithValue} from '@reduxjs/toolk
 
 export const handleDetails = createAsyncThunk('details/details-fetch',async(id)=>{
   const apiKey = import.meta.env.VITE_APIKEY;
-  const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}
-  `)
+  const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`)
   const json = await response.json()
   if(!response.ok){
     throw new Error(json.message)
