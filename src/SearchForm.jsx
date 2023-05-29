@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleSearch } from "./store/searchSlice";
 import SearchResult from "./SearchResult";
+import Loader from "./Loader";
 
 function SearchForm() {
   const dispatch = useDispatch();
@@ -41,9 +42,7 @@ function SearchForm() {
         </button>
       </form>
       {loading ? (
-        <div>
-          <p>Loading..</p>
-        </div>
+        <Loader />
       ) : null}
       <div className="flex flex-wrap justify-center">
         {error ? <div>{error}</div> :null}

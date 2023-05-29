@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { handleDetails } from "./store/detailsSlice";
 import { Link } from "react-router-dom";
-import { useMemo } from "react";
+import Loader from "./Loader";
 
 function ReceiptDetails() {
   const { id } = useParams();
-  const memoID = useMemo(() => id)
-  const endPoint = `${id}/information?`;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(handleDetails(id));
@@ -22,20 +20,14 @@ function ReceiptDetails() {
       <div className="text-left  p-2">
         <Link to="/cooking-assistant/" className="fas fa-arrow-circle-left hover:text-red-600  text-red-800 text-lg"></Link>
       </div>
-      {loading ? <div className="p-2">Loading...</div> : null}
+      {loading ? <Loader /> : null}
       {error ? <div>{error}</div> : null}
       {details ? (
         <div>
-          <header>
+          <header className="p-4">
             <h1>{details.title}</h1>
           </header>
-          {details ? <ul>
-            Dish types:
-            {details.dishTypes
-              ? details.dishTypes.map((type,idx) => 
-              <li key={idx}>{type}</li>)
-              : null}
-          </ul> :null}
+          
           <img src={details.image} alt="dish image" className="mx-auto p-2"/>
           <article>
             {details ? details.analyzedInstructions[0].steps.map((instruction,idx)=>
@@ -44,6 +36,8 @@ function ReceiptDetails() {
               <p>{instruction.step}</p>
             </div>
             ) :null}
+            <span>Credits:</span>
+            <p>{details.creditsText}</p>
           </article>
         </div>
       ) : null}
