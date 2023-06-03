@@ -42,7 +42,10 @@ function SearchForm() {
         </button>
       </form>
       {loading ? (
-        <Loader />
+        <div className="bg-white min-h-[350px] grid place-content-center">
+          <Loader />
+        </div>
+
       ) : null}
       <div className="flex flex-wrap justify-center">
         {error ? <div>{error}</div> :null}

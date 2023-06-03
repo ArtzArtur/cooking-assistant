@@ -3,6 +3,7 @@ import Home from "./Home";
 import RandomReceipts from "./RandomReceipts";
 import ReceiptDetails from "./ReceiptDetails";
 import { useState } from "react";
+import NutritionForm from "./NutritionForm";
 function App() {
   const [showNav, setShowNav] = useState(false);
   const handleNav = () => {
@@ -47,6 +48,9 @@ function App() {
               <li className="p-2 m-2">
                 <Link onClick={()=>setShowNav(nav=>nav=false)} className="hover:text-red-200" to="/cooking-assistant/RandomReceipts">Random receipts</Link>
               </li>
+              <li className="p-2 m-2">
+                <Link onClick={()=>setShowNav(nav=>nav=false)} className="hover:text-red-200" to="/cooking-assistant/NutritionForm">Receipts by nutrition</Link>
+              </li>
             </ul>
           </nav>
         </header>
@@ -54,6 +58,7 @@ function App() {
           <Route path="/cooking-assistant/" element={<Home />}></Route>
           <Route path="/cooking-assistant/ReceiptDetails/:id" element={<ReceiptDetails />}></Route>
           <Route path="/cooking-assistant/RandomReceipts" element={<RandomReceipts />}></Route>
+          <Route path="/cooking-assistant/NutritionForm" element={<NutritionForm />}></Route>
         </Routes>
       </Router>
     </div>

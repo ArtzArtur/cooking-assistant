@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, isRejectedWithValue} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 
 
 export const handleDetails = createAsyncThunk('details/details-fetch',async(id)=>{
@@ -31,7 +31,6 @@ export const detailsSlice = createSlice({
       state.details = action.payload
     })
     .addCase(handleDetails.rejected,(state,err)=>{
-      console.log(err)
       state.loading = false,
       state.details = null,
       state.error = err.error.message
