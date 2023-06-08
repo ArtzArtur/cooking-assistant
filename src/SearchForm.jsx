@@ -41,8 +41,9 @@ function SearchForm() {
           Search
         </button>
       </form>
+
       {loading ? (
-        <div className="bg-white min-h-[350px] grid place-content-center">
+        <div className="min-h-[350px] grid place-content-center bg-white">
           <Loader />
         </div>
 
