@@ -36,7 +36,7 @@ export const searchSlice = createSlice({
         state.loading = false
       })
       .addCase(handleSearch.rejected, (state, err) => {
-        console.log(err)
+        console.log('rejected',err)
         state.data = [],
         state.loading = false
         state.error = err.error.message

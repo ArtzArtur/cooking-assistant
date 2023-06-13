@@ -21,12 +21,12 @@ function SearchForm() {
     dispatch(handleSearch(query));
   };
   return (
-    <div>
-      <form
+    <div >
+      <form 
         onSubmit={(e) => {
           e.preventDefault(), handleForm(query);
         }}
-        className="grid place-content-center"
+        className="grid place-content-center bg-red-800"
       >
         <input
           onChange={(e) => setQuery((old) => (old = e.target.value.trim()))}
@@ -43,13 +43,13 @@ function SearchForm() {
       </form>
 
       {loading ? (
-        <div className="min-h-[350px] grid place-content-center bg-white">
+        <div className="min-h-[350px] grid place-content-center">
           <Loader />
         </div>
 
       ) : null}
       <div className="flex flex-wrap justify-center">
-        {error ? <div>{error}</div> :null}
+        {error ? <div className="text-black p-4">{error}</div> :null}
         {data.results
           ? data.results.map((meal) => (
               <SearchResult meal={meal} key={meal.id} />

@@ -1,21 +1,25 @@
 import { useState } from "react"
-import {useDispatch} from "react-redux"
-import { handleNutritionReceipts } from "./nutritionSlice"
-
+import {useDispatch, useSelector} from "react-redux"
+import { handleNutritionReceipts } from "./store/nutritionSlice"
+import SearchResult from "./SearchResult"
+import Loader from "./Loader"
 
 function NutritionForm() {
   const [nutrition,setNutrition] = useState({
     calories:0,protein:0,carbs:0,fat:0
-  }) 
+  })
+  const data = useSelector(state=>state.nutrition.data) 
+  const loading = useSelector(state=>state.nutrition.loading) 
+  const error = useSelector(state=>state.nutrition.error)
   const dispatch = useDispatch()
   const handleSubmit = (e,nutrition) => {
     e.preventDefault()
     dispatch(handleNutritionReceipts(nutrition))
   }
   return (
-    <div>
+    <div className="">
       <form
-        className="grid place-content-center"
+        className=" bg-red-700 grid place-content-center text-white"
         onSubmit={e=>handleSubmit(e,nutrition)}
       >
         <label>Maximum calories:</label>
@@ -58,6 +62,15 @@ function NutritionForm() {
           Search
         </button>
       </form>
+      {loading ? <Loader /> : null}
+      {error ? <p className="text-center">{error}</p> : null}
+      <div className="flex flex-wrap justify-center ">
+      {
+        data ? data.map(meal=>
+          <SearchResult meal={meal} key={meal.id}/>
+          ) :null
+        }
+        </div>
       </div>
       )
 }

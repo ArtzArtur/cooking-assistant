@@ -3,8 +3,8 @@ import SearchForm from "./SearchForm"
 
 function Home() {
   return (
-    <div className="bg-red-800 bg-opacity-80 text-center  text-white">
-          <h3 className="p-5 tracking-[0.5ch]">Welcome to cooking assistant</h3>
+    <div className="text-center  text-white">
+          <h3 className="p-5 tracking-[0.5ch]  bg-red-800">Welcome to cooking assistant</h3>
           <SearchForm />
     </div>
   )

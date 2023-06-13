@@ -41,7 +41,7 @@ function ReceiptDetails() {
                   (instruction, idx) => (
                     <div
                       key={idx}
-                      className="p-2 grid sm:grid-cols-[70px_1fr] shadow-md m-4 items-center"
+                      className="p-4 grid sm:grid-cols-[70px_1fr] shadow-md my-8 items-center"
                     >
                       <span className="p-2 w-[40px] h-[40px] bg-red-800 text-white rounded-full block mx-auto">
                         {instruction.number}
@@ -51,8 +51,13 @@ function ReceiptDetails() {
                   )
                 )
               : null}
-            <span>Credits:</span>
+            <div className="bg-slate-700 text-white p-3">
+              <span>
+              Credits:
+                </span>
             <p>{details.creditsText}</p>
+              
+              </div>
           </article>
         </div>
       ) : null}
