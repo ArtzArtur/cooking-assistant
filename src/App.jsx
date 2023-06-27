@@ -36,7 +36,7 @@ function App() {
             )}
 
             <ul
-              className={`grid h-screen w-full place-content-center absolute top-0 left-0 bg-red-700 transition-opacity duration-500 ${
+              className={`text-center grid h-screen w-full place-content-center absolute top-0 left-0 bg-red-700 transition-opacity duration-500 ${
                 showNav
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"

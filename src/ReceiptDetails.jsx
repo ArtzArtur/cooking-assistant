@@ -15,7 +15,6 @@ function ReceiptDetails() {
   useEffect(() => {
     dispatch(handleDetails(id));
   }, [id]);
-  console.log(details)
   return (
     <div className="text-center max-w-[950px] mx-auto">
       <div className="text-left  p-2">
